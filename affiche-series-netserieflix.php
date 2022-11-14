@@ -38,35 +38,45 @@
     <h2>Liste des séries en base <i>(de la mieux notée à la moins bien notée)</i> :</h2>
     <ul>
      <?php
-        selectOrdre()
+        selectOrdre();
      ?>
     </ul>
 
     <h2>Liste des séries appartenant au genre Comique</i> :</h2>
     <ul>
      <?php
-        selectGenre("comique")
+        selectGenre("comique");
      ?>
     </ul>
 
     <h2>Afficher le nombre de saisons pour une série donnée :</h2>
     <!-- (On ne définit pas la propriété "action" car on veut que
         ça recharge la même page) -->
-    <form method="get">
+    <form action="nbSaison.php" method="get">
        <label for="cars">Choisir la série :
-          <select name="nomSerie">
-            <option value="..." >...</option>
+          <select id="nomSerie" name="nomSerie">
+            <?php
+              selectSerie();
+            ?>
           </select>
         </label>
         &nbsp;
         <button type="submit">Lancer la recherche</button>
     </form>
+    <?php
+      if(isset($_GET['nb']) && $_GET['nb'] != ""){
+        echo "<h3>".$_GET['nb']." Saison(s).</h3>";
+      }
+    ?>
 
     <h2>Nombre d'épisodes par saison de la série Black Mirror :</h2>
     <!-- INDICATION : Vous n'avez besoin que des tables episode et serie
           pour cette requête -->
     <ul>
-      <li>...</li>
+
+    <?php
+      selectNbEpisode_saison("Black Mirror")
+    ?>
     </ul>
 
   </body>
